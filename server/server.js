@@ -22,11 +22,34 @@ app.get( '/', function ( req, res) {
   })
 })
 
-app.get('/do/:wait', function (req, res, next) {
-  var wait = req.params.wait;
-  console.log('Doing something, will reply in ' + wait + ' seconds')
-  setTimeout((function() {res.send(["foo","bar","test","support","ok"])}), wait*1000)
-
+app.get('/em/do/:wait?', function (req, res, next) {
+  var wait = req.params.wait
+  if (!wait) {
+    console.log('Doing something')
+    res.send(["foo","bar","test","support","ok"])
+  } else {
+    console.log('Doing something, will reply in ' + wait + ' seconds')
+    setTimeout((function() {res.send(["foo","bar","test","support","ok"])}), wait*1000)
+  }
  })
-
+ app.get('/run/do/:wait?', function (req, res, next) {
+   var wait = req.params.wait
+   if (!wait) {
+     console.log('Doing something')
+     res.send(["foo","bar","test","support","ok"])
+   } else {
+     console.log('Doing something, will reply in ' + wait + ' seconds')
+     setTimeout((function() {res.send(["foo","bar","test","support","ok"])}), wait*1000)
+   }
+  })
+  app.get('/do/:wait?', function (req, res, next) {
+    var wait = req.params.wait
+    if (!wait) {
+      console.log('Doing something')
+      res.send(["foo","bar","test","support","ok"])
+    } else {
+      console.log('Doing something, will reply in ' + wait + ' seconds')
+      setTimeout((function() {res.send(["foo","bar","test","support","ok"])}), wait*1000)
+    }
+   })
 app.listen( process.env.PORT || 4000)
